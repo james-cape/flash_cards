@@ -19,11 +19,13 @@ class Turn
 
 # This method returns a boolean indicating if the guess matched the answer on the Card.
   def correct?
-
+    return true if card.answer == @guess #"Juneau"
+    false
   end
 
 # This method either returns "Correct!" or "Incorrect." based on whether the guess was correct or not.
   def feedback
-
+    return "Correct!" if card.answer == @guess
+    false
   end
 end

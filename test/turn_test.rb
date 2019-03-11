@@ -32,27 +32,23 @@ class TurnTest < Minitest::Test
     assert_equal :Geography, card.category
     assert_equal "What is the capital of Alaska?", card.question
 
-
   end
 
   def test_if_if_the_guess_is_correct
-    skip
+
     card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     turn = Turn.new("Juneau", card)
+
+    assert turn.correct?
 
   end
 
   def test_feedback_is_correct
-    skip
+
     card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     turn = Turn.new("Juneau", card)
 
-  end
-
-  def test_feedback_is_incorrect
-    skip
-    card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
-    turn = Turn.new("Juneau", card)
+    assert_equal "Correct!", turn.feedback
 
   end
 
