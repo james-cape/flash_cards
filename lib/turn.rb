@@ -14,7 +14,7 @@ class Turn
 
 # This method returns the Card
   def card
-
+    @card
   end
 
 # This method returns a boolean indicating if the guess matched the answer on the Card.
