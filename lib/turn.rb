@@ -26,6 +26,6 @@ class Turn
 # This method either returns "Correct!" or "Incorrect." based on whether the guess was correct or not.
   def feedback
     return "Correct!" if card.answer == @guess
-    false
+    "Incorrect."
   end
 end
