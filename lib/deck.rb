@@ -1,15 +1,15 @@
 class Deck
 
 # A deck is initilized.
-  attr_accessor :deck
+  attr_reader :cards
   def initialize
-    @deck = Array.new
+    @cards = Array.new
 
   end
 
 # This method adds cards to the deck.
-  def add_to_deck(new_card)
-    @deck << new_card
+  def << (new_card)
+    @cards << new_card
   end
 
 end
