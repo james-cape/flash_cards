@@ -68,8 +68,13 @@ class DeckTest < Minitest::Test
 
     deck = Deck.new(cards)
 
+
+# Not sure why this passes - as the [element] increases, it cycles back through the remaining deck.
     assert_equal 2, deck.count_cards_in_category(:STEM)
-    assert_equal 2, deck.list_cards_in_category(:STEM)
+    assert_equal :STEM, deck.list_cards_in_category(:STEM)[0].category
+    assert_equal :STEM, deck.list_cards_in_category(:STEM)[1].category
+    assert_equal :STEM, deck.list_cards_in_category(:STEM)[2].category
+    assert_equal :STEM, deck.list_cards_in_category(:STEM)[3].category
 
   end
 
