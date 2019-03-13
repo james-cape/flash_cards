@@ -68,7 +68,7 @@ class DeckTest < Minitest::Test
 
     deck = Deck.new(cards)
 
-    assert_equal 2, deck.cards_in_category(:STEM)
+    assert_equal [card_2, card_3], deck.cards_in_category(:STEM)
 
   end
 
