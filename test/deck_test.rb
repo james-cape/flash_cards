@@ -56,7 +56,7 @@ class DeckTest < Minitest::Test
 
   end
 
-  def test_counting_cards_by_category
+  def test_counting_and_producing_cards_by_category
 
     card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
 
@@ -68,8 +68,18 @@ class DeckTest < Minitest::Test
 
     deck = Deck.new(cards)
 
-    assert_equal [card_2, card_3], deck.cards_in_category(:STEM)
+    assert_equal 2, deck.count_cards_in_category(:STEM)
+    assert_equal 2, deck.list_cards_in_category(:STEM)
 
   end
 
 end
+
+
+
+
+
+
+
+
+#
