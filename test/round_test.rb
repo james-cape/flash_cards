@@ -8,6 +8,8 @@ require 'pry'
 
 class RoundTest < Minitest::Test
 
+#Can add attr_reader :card_1, :card_2, card_3, deck, round if you want to get rid of the "@" throughout the rest of the tests.
+
   def setup
 
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
@@ -82,10 +84,46 @@ class RoundTest < Minitest::Test
   def test_number_correct_by_category
     new_turn = @round.take_turn("Juneau")
     new_turn = @round.take_turn("Venus")
-    assert_equal 1, @round.number_correct_by_category(:Geography)
 
+    assert_equal 1, @round.number_correct_by_category(:Geography)
   end
 
+  def test_number_correct_by_category_none_right
+    new_turn = @round.take_turn("Juneau")
+    new_turn = @round.take_turn("Mars")
 
+    assert_equal 1, @round.number_correct_by_category(:STEM)
+  end
+
+  def test_percent_correct
+    new_turn = @round.take_turn("Juneau")
+    new_turn = @round.take_turn("Venus")
+
+    expected = 50.0
+    actual = @round.percent_correct
+
+    assert_equal expected, actual
+  end
+
+  def test_percent_correct_by_category
+    new_turn = @round.take_turn("Juneau")
+    new_turn = @round.take_turn("Venus")
+
+    expected = 100.0
+    actual = @round.percent_correct_by_category(:Geography)
+
+    assert_equal expected, actual
+  end
+
+  def test_current_card_after_two_turns
+
+    new_turn = @round.take_turn("Juneau")
+    new_turn = @round.take_turn("Venus")
+
+    expected = @card_3
+    actual = @round.current_card
+
+    assert_equal expected, actual
+  end
 
 end

@@ -41,25 +41,33 @@ class Round
     correct_turns_arr.count
   end
 
+
   def number_correct_by_category(category)
+# First create an array of turns with correct guesses.
     correct_turns_arr = []
-    correct_ans_and_cat = []
     @turns.each do |turn|
       correct_turns_arr << turn if turn.correct?
     end
-    # binding.pry
+# Create a second array of turns with the right category, but that are shoveled in from the array of correct guesses.
+    correct_cats_and_turns = []
     correct_turns_arr.each do |turn|
-      binding.pry
-      correct_ans_and_cat << turn if @turns[4] == category
+      correct_cats_and_turns << turn if turn.card.category == category
     end
-    correct_ans_and_cat.count
-    # correct_turns_arr.cards_by_category(:Geography)
-
-
-
-
+    correct_cats_and_turns.count
   end
 
+  def percent_correct
+    100 * number_correct.to_f / @turns.count
+  end
+
+  def percent_correct_by_category(category)
+    total_in_category = []
+    @turns.each do |turn|
+      total_in_category << turn if turn.card.category == category
+    end
+
+    100 * number_correct_by_category(category).to_f / total_in_category.count
+  end
 
 
 
