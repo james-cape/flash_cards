@@ -99,6 +99,10 @@ class RoundTest < Minitest::Test
     new_turn = @round.take_turn("Juneau")
     new_turn = @round.take_turn("Venus")
 
+# Can you take out all the "new_turn"s?
+#
+######
+
     expected = 50.0
     actual = @round.percent_correct
 
