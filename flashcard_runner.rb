@@ -25,7 +25,7 @@ require 'pry'
 @deck = Deck.new([@card_1, @card_2, @card_3, @card_4])
 @round = Round.new(@deck)
 
-
+while 
 puts "Welcome! You're playing with #{@deck.count} cards."
 puts "-------------------------------------------------"
 puts "This is card number #{@round.deck_index + 1} out of #{@deck.count}."
@@ -33,4 +33,4 @@ puts "Question: #{@card_1.question}"
 
 guess = gets.chomp.to_i
 
-round.start
+# round.start
