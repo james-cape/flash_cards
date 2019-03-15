@@ -14,38 +14,17 @@ require 'pry'
 # Create a new Round using the Deck you created
 # Start the round using a new method called start (round.start)
 
-@card_1 = Card.new("What is 5 + 5?", "10", :STEM)
 
-@card_2 = Card.new("What is Rachel's favorite animal?", "Elephant", :Turing_Staff)
 
-@card_3 = Card.new("What is Mike's middle name?", "nobody knows", :Turing_Staff)
+  @card_1 = Card.new("What is 5 + 5?", "10", :STEM)
 
-@card_4 = Card.new("What cardboard cutout lives at Turing?", "Justin Bieber", :Pop_Culture)
+  @card_2 = Card.new("What is Rachel's favorite animal?", "Elephant", :Turing_Staff)
 
-@deck = Deck.new([@card_1, @card_2, @card_3, @card_4])
-@round = Round.new(@deck)
+  @card_3 = Card.new("What is Mike's middle name?", "nobody knows", :Turing_Staff)
 
-puts "Welcome! You're playing with #{@deck.count} cards."
-puts "-------------------------------------------------"
+  @card_4 = Card.new("What cardboard cutout lives at Turing?", "Justin Bieber", :Pop_Culture)
 
-i = 0
-while i < @deck.count
+  @deck = Deck.new([@card_1, @card_2, @card_3, @card_4])
+  @round = Round.new(@deck)
 
-puts "This is card number #{@round.deck_index + 1} out of #{@deck.count}."
-puts "Question: #{@deck.cards[i].question}"
-
-guess = gets.chomp
-
-@round.take_turn(guess)
-
-puts @round.turns.last.feedback #Correct or incorrect
-i += 1
-end
-
-puts "****** Game over! ******"
-# round_test instructions specified percentages to one decimal
-puts "You had #{@round.number_correct} correct guesses out of #{i} for a total score of #{@round.percent_correct}%."
-puts "STEM - #{@round.percent_correct_by_category(:STEM)}% correct"
-puts "Turing Staff - #{@round.percent_correct_by_category(:Turing_Staff)}% correct"
-puts "Pop Culture - #{@round.percent_correct_by_category(:Pop_Culture)}% correct"
-# round.start
+@round.start

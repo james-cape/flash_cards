@@ -17,6 +17,33 @@ class Round
     @current_card = []
   end
 
+  def start
+  puts "Welcome! You're playing with #{@deck.count} cards."
+  puts "-------------------------------------------------"
+
+  i = 0
+  while i < @deck.count
+
+  puts "This is card number #{i + 1} out of #{@deck.count}."
+  puts "Question: #{@deck.cards[i].question}"
+
+  guess = gets.chomp
+
+  take_turn(guess)
+
+  puts turns.last.feedback #Correct or incorrect
+  i += 1
+  end
+
+  puts "****** Game over! ******"
+  # round_test instructions specified percentages to one decimal
+  puts "You had #{number_correct} correct guesses out of #{i} for a total score of #{percent_correct}%."
+  puts "STEM - #{percent_correct_by_category(:STEM)}% correct"
+  puts "Turing Staff - #{percent_correct_by_category(:Turing_Staff)}% correct"
+  puts "Pop Culture - #{percent_correct_by_category(:Pop_Culture)}% correct"
+  end
+
+
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
     @turns << new_turn
@@ -30,7 +57,7 @@ class Round
 
 # Returns a card from the deck depending on the turn count.
   def current_card
-    @deck.cards[deck_index]
+    @deck.cards[@turns.count]
   end
 
   def number_correct
