@@ -44,14 +44,11 @@ class Round
     categories.each do |cat|
       puts "#{cat} - #{percent_correct_by_category(cat)}% correct"
     end
-
   end
-
 
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
     @turns << new_turn
-
     new_turn
   end
 

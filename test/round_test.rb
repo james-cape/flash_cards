@@ -32,83 +32,117 @@ class RoundTest < Minitest::Test
   end
 
   def test_no_guess_submitted_yet
-    assert_equal [], round.turns
+    expected  = []
+    actual    = round.turns
+    assert_equal expected, actual
   end
 
-  def test_card_1_is_in_play
-    assert_equal card_1, round.current_card
+  def test_card_1_is_in_play_at_start
+    expected  = card_1
+    actual    = round.current_card
+    assert_equal expected, actual
   end
 
-  def test_take_first_turn
+  def test_turn_is_created
     new_turn = round.take_turn("Juneau")
-    assert_instance_of Turn, new_turn
+
+    expected  = Turn
+    actual    = new_turn
+    assert_instance_of expected, actual
   end
 
-  def test_correct
+  def test_first_guess_is_correct
     new_turn = round.take_turn("Juneau")
+
     assert new_turn.correct?
   end
 
-  def test_round_turns
-    new_turn = round.take_turn("Juneau")
-    assert_equal [new_turn], round.turns
+  def test_first_guess_is_incorrect
+    new_turn = round.take_turn("nobody knows")
+
+    refute new_turn.correct?
   end
 
-  def test_number_correct_and_current_card
+  def test_first_and_second_rounds_are_stored
     round.take_turn("Juneau")
-    assert_equal 1, round.number_correct
-    assert_equal card_2, round.current_card
+    round.take_turn("mars")
+
+    assert_equal "Juneau", round.turns[0].card.answer
+    assert_equal "Juneau", round.turns[0].guess
+    assert_equal :Geography, round.turns[0].card.category
+
+    assert_equal "Mars", round.turns[1].card.answer
+    assert_equal "mars", round.turns[1].guess
+    assert_equal :STEM, round.turns[1].card.category
   end
 
-  def test_second_turn
+  def test_guesses_correct_and_current_card
     round.take_turn("Juneau")
-    round.take_turn("Venus")
-    assert_instance_of Turn, round.take_turn("Venus")
+
+    assert_equal      1,  round.number_correct
+    assert_equal card_2,  round.current_card
   end
 
-  def test_number_of_turns_taken_after_two
-    round.take_turn("Juneau")
-    round.take_turn("Venus")
-    assert_equal 2, round.turns.count
-  end
-
-  def test_feedback_on_second_guess
-    round.take_turn("Juneau")
-    round.take_turn("Venus")
-    assert_equal "Incorrect.", round.turns.last.feedback
-  end
-
-  def test_number_correct_after_second_guess
+  def test_second_turn_is_created
     round.take_turn("Juneau")
     round.take_turn("Venus")
-    assert_equal 1, round.number_correct
+
+    expected  = Turn
+    actual    = round.take_turn("Venus")
+    assert_instance_of expected, actual
+  end
+
+  def test_two_turns_taken_and_stored
+    round.take_turn("Juneau")
+    round.take_turn("Venus")
+
+    expected  = 2
+    actual    = round.turns.count
+    assert_equal expected, actual
+  end
+
+  def test_feedback_on_last_guess
+    round.take_turn("Juneau")
+    round.take_turn("Venus")
+
+    expected  = "Incorrect."
+    actual    = round.turns.last.feedback
+    assert_equal expected, actual
+  end
+
+  def test_number_correct_after_last_guess
+    round.take_turn("Juneau")
+    round.take_turn("Venus")
+
+    expected  = 1
+    actual    = round.number_correct
+    assert_equal expected, actual
   end
 
   def test_number_correct_by_category
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    assert_equal 1, round.number_correct_by_category(:Geography)
+    expected  = 1
+    actual    = round.number_correct_by_category(:Geography)
+    assert_equal expected, actual
   end
 
   def test_number_correct_by_category_none_right
     round.take_turn("Juneau")
-    round.take_turn("Mars")
+    round.take_turn("Hershey")
 
-    assert_equal 1, round.number_correct_by_category(:STEM)
+    expected  = 0
+    actual    = round.number_correct_by_category(:STEM)
+    assert_equal expected, actual
   end
 
-  def test_percent_correct
+  def test_percent_correct_overall
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-# Can you take out all the "new_turn"s?
-#
-######
-
-    expected = 50.0
-    actual = round.percent_correct
-
+    expected  = 50.0
+    actual    = round.percent_correct
     assert_equal expected, actual
   end
 
@@ -116,34 +150,28 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected = 100.0
-    actual = round.percent_correct_by_category(:Geography)
-
+    expected  = 100.0
+    actual    = round.percent_correct_by_category(:Geography)
     assert_equal expected, actual
   end
 
   def test_current_card_after_two_turns
-
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected = card_3
-    actual = round.current_card
-
+    expected  = card_3
+    actual    = round.current_card
     assert_equal expected, actual
   end
 
   def test_category_array_at_end_of_game
-
     round.take_turn("Juneau")
     round.take_turn("Venus")
     round.take_turn("Venus")
 
-    expected = [:Geography, :STEM]
-    actual = round.categories
-
+    expected  = [:Geography, :STEM]
+    actual    = round.categories
     assert_equal expected, actual
-
   end
 
 end
