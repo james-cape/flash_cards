@@ -15,13 +15,10 @@ class Round
   end
 
   def start
-    if @deck.count == 1
-      puts "Welcome! You're playing with #{deck.count} card."
-    else
-      puts "Welcome! You're playing with #{deck.count} cards."
-    end
+    puts "Welcome! You're playing with #{deck.count} card#{"s" if @deck.count != 1}."
     puts "-------------------------------------------------"
 
+# Iterates through cards, asks user for guesses, and ends after the last card.
     i = 0
     while i < deck.count
       puts "This is card number #{i + 1} out of #{deck.count}."
@@ -30,17 +27,14 @@ class Round
       guess = gets.chomp
       take_turn(guess)
 
-      puts turns.last.feedback #Correct or incorrect
+      puts turns.last.feedback #"Correct" or "incorrect"
       i += 1
     end
 
     puts "****** Game over! ******"
-    if number_correct == 1
-      puts "You had #{number_correct} correct guess out of #{i} for a total score of #{percent_correct}%."
-    else
-      puts "You had #{number_correct} correct guesses out of #{i} for a total score of #{percent_correct}%."
-    end
+    puts "You had #{number_correct} correct guess#{"es" if number_correct != 1} out of #{i} for a total score of #{percent_correct}%."
 
+# Iterates through dynamic list of categories and puts % correct for each category.
     categories.each do |cat|
       puts "#{cat} - #{percent_correct_by_category(cat)}% correct"
     end
@@ -57,7 +51,7 @@ class Round
   end
 
   def number_correct
-    turns.select { |turn| turn.correct? }.count
+    turns.count { |turn| turn.correct? }
   end
 
   def categories
@@ -65,7 +59,7 @@ class Round
   end
 
   def number_correct_by_category(category)
-    turns.select { |turn| turn.correct? && turn.card.category == category }.count
+    turns.count { |turn| turn.correct? && turn.card.category == category }
   end
 
   def percent_correct
@@ -73,7 +67,7 @@ class Round
   end
 
   def percent_correct_by_category(category)
-    total_in_category = turns.select { |turn| turn.card.category == category}.count
+    total_in_category = turns.count { |turn| turn.card.category == category}
     100 * number_correct_by_category(category).to_f / total_in_category
   end
 

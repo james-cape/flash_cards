@@ -13,15 +13,11 @@ class Deck
   end
 
   def count_cards_in_category(category)
-    cards.count do |card|
-      card.category == category
-    end
+    cards.count { |card| card.category == category }
   end
 
   def cards_in_category(category)
-    cards.find_all do |card|
-      card.category == category
-    end
+    cards.find_all { |card| card.category == category}
   end
 
 end
