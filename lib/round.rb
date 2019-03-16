@@ -6,7 +6,6 @@ require './lib/deck'
 require 'pry'
 
 class Round
-
   attr_reader :deck,
               :turns,
               :current_card
@@ -15,7 +14,6 @@ class Round
     @deck =         deck
     @turns =        []
     @current_card = []
-
   end
 
   def start
@@ -23,18 +21,16 @@ class Round
     puts "-------------------------------------------------"
 
     i = 0
-      while i < @deck.count
+    while i < @deck.count
+      puts "This is card number #{i + 1} out of #{@deck.count}."
+      puts "Question: #{@deck.cards[i].question}"
 
-        puts "This is card number #{i + 1} out of #{@deck.count}."
-        puts "Question: #{@deck.cards[i].question}"
+      guess = gets.chomp
+      take_turn(guess)
 
-        guess = gets.chomp
-
-        take_turn(guess)
-
-        puts turns.last.feedback #Correct or incorrect
-        i += 1
-      end
+      puts turns.last.feedback #Correct or incorrect
+      i += 1
+    end
 
     puts "****** Game over! ******"
     # round_test instructions specified percentages to one decimal
@@ -52,8 +48,7 @@ class Round
     new_turn
   end
 
-# Returns a card from the deck depending on the turn count.
-  def current_card
+  def current_card # Returns a card from the deck depending on the current turn count.
     @deck.cards[@turns.count]
   end
 
@@ -65,28 +60,20 @@ class Round
     correct_turns_arr.count
   end
 
-  def categories
-# Creates array of categories entered by the end of the game.
+  def categories # Creates array of all categories entered by the end of the game.
     category_array = []
     @turns.map do |turn|
       category_array << turn.card.category
     end
     category_array.uniq
-
   end
 
   def number_correct_by_category(category)
-# First create an array of turns with correct guesses.
     correct_turns_arr = []
     @turns.each do |turn|
-      correct_turns_arr << turn if turn.correct?
+      correct_turns_arr << turn if turn.correct? && turn.card.category == category
     end
-# Create a second array of turns with the right category, but that are shoveled in from the array of correct guesses.
-    correct_cats_and_turns = []
-    correct_turns_arr.each do |turn|
-      correct_cats_and_turns << turn if turn.card.category == category
-    end
-    correct_cats_and_turns.count
+    correct_turns_arr.count
   end
 
   def percent_correct
@@ -101,8 +88,5 @@ class Round
 
     100 * number_correct_by_category(category).to_f / total_in_category.count
   end
-
-
-
 
 end
