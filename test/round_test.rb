@@ -7,14 +7,12 @@ require './lib/deck'
 require 'pry'
 
 class RoundTest < Minitest::Test
-
   attr_reader :card_1,
               :card_2,
               :card_3,
               :deck,
               :round
   def setup
-
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
 
     @card_2 = Card.new("The Viking spacecraft sent back to Earth photographs and reports about the surface of which planet?", "Mars", :STEM)
@@ -26,9 +24,9 @@ class RoundTest < Minitest::Test
   end
 
   def test_instance_of_deck_and_round
-    assert_instance_of Deck, deck
+    assert_instance_of Deck,  deck
     assert_instance_of Round, round
-    assert_instance_of Deck, round.deck
+    assert_instance_of Deck,  round.deck
   end
 
   def test_no_guess_submitted_yet
@@ -67,13 +65,13 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("mars")
 
-    assert_equal "Juneau", round.turns[0].card.answer
-    assert_equal "Juneau", round.turns[0].guess
-    assert_equal :Geography, round.turns[0].card.category
+    assert_equal   "Juneau",  round.turns[0].card.answer
+    assert_equal   "Juneau",  round.turns[0].guess
+    assert_equal :Geography,  round.turns[0].card.category
 
-    assert_equal "Mars", round.turns[1].card.answer
-    assert_equal "mars", round.turns[1].guess
-    assert_equal :STEM, round.turns[1].card.category
+    assert_equal     "Mars",  round.turns[1].card.answer
+    assert_equal     "mars",  round.turns[1].guess
+    assert_equal      :STEM,  round.turns[1].card.category
   end
 
   def test_guesses_correct_and_current_card
