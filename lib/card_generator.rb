@@ -24,7 +24,7 @@ class CardGenerator
     break_rows.map do |entry|
       question = entry[0]
       answer = entry[1].to_s
-      category = ":#{entry[2]}"
+      category = "#{entry[2]}"
       Card.new(question, answer, category)
     end
   end

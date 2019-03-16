@@ -68,8 +68,8 @@ class RoundTest < Minitest::Test
     assert_equal :Geography, round.turns[0].card.category
 
     assert_equal     "Mars", round.turns[1].card.answer
-    assert_equal     "mars", round.turns[1].guess
-    assert_equal      :STEM, round.turns[1].card.category
+    assert_equal     "Mars", round.turns[1].guess
+    assert_equal      :Stem, round.turns[1].card.category
   end
 
   def test_guesses_correct_and_current_card
@@ -129,7 +129,7 @@ class RoundTest < Minitest::Test
     round.take_turn("Hershey")
 
     expected = 0
-    actual   = round.number_correct_by_category(:STEM)
+    actual   = round.number_correct_by_category(:Stem)
     assert_equal expected, actual
   end
 
@@ -165,7 +165,7 @@ class RoundTest < Minitest::Test
     round.take_turn("Venus")
     round.take_turn("Venus")
 
-    expected = [:Geography, :STEM]
+    expected = [:Geography, :Stem]
     actual   = round.categories
     assert_equal expected, actual
   end
