@@ -30,22 +30,22 @@ class RoundTest < Minitest::Test
   end
 
   def test_no_guess_submitted_yet
-    expected  = []
-    actual    = round.turns
+    expected = []
+    actual   = round.turns
     assert_equal expected, actual
   end
 
   def test_card_1_is_in_play_at_start
-    expected  = card_1
-    actual    = round.current_card
+    expected = card_1
+    actual   = round.current_card
     assert_equal expected, actual
   end
 
   def test_turn_is_created
     new_turn = round.take_turn("Juneau")
 
-    expected  = Turn
-    actual    = new_turn
+    expected = Turn
+    actual   = new_turn
     assert_instance_of expected, actual
   end
 
@@ -85,8 +85,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = Turn
-    actual    = round.take_turn("Venus")
+    expected = Turn
+    actual   = round.take_turn("Venus")
     assert_instance_of expected, actual
   end
 
@@ -94,8 +94,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = 2
-    actual    = round.turns.count
+    expected = 2
+    actual   = round.turns.count
     assert_equal expected, actual
   end
 
@@ -103,8 +103,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = "Incorrect."
-    actual    = round.turns.last.feedback
+    expected = "Incorrect."
+    actual   = round.turns.last.feedback
     assert_equal expected, actual
   end
 
@@ -112,8 +112,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = 1
-    actual    = round.number_correct
+    expected = 1
+    actual   = round.number_correct
     assert_equal expected, actual
   end
 
@@ -121,8 +121,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = 1
-    actual    = round.number_correct_by_category(:Geography)
+    expected = 1
+    actual   = round.number_correct_by_category(:Geography)
     assert_equal expected, actual
   end
 
@@ -130,8 +130,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Hershey")
 
-    expected  = 0
-    actual    = round.number_correct_by_category(:STEM)
+    expected = 0
+    actual   = round.number_correct_by_category(:STEM)
     assert_equal expected, actual
   end
 
@@ -139,8 +139,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = 50.0
-    actual    = round.percent_correct
+    expected = 50.0
+    actual   = round.percent_correct
     assert_equal expected, actual
   end
 
@@ -148,8 +148,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = 100.0
-    actual    = round.percent_correct_by_category(:Geography)
+    expected = 100.0
+    actual   = round.percent_correct_by_category(:Geography)
     assert_equal expected, actual
   end
 
@@ -157,8 +157,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("Venus")
 
-    expected  = card_3
-    actual    = round.current_card
+    expected = card_3
+    actual   = round.current_card
     assert_equal expected, actual
   end
 
@@ -167,8 +167,8 @@ class RoundTest < Minitest::Test
     round.take_turn("Venus")
     round.take_turn("Venus")
 
-    expected  = [:Geography, :STEM]
-    actual    = round.categories
+    expected = [:Geography, :STEM]
+    actual   = round.categories
     assert_equal expected, actual
   end
 
