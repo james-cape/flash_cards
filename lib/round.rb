@@ -55,11 +55,11 @@ class Round
   end
 
   def categories
-    turns.map { |turn| turn.card.category }.uniq
+    turns.map { |turn| turn.card.category.downcase }.uniq
   end
 
   def number_correct_by_category(category)
-    turns.count { |turn| turn.correct? && turn.card.category == category }
+    turns.count { |turn| turn.correct? && turn.card.category.downcase == category.downcase }
   end
 
   def percent_correct
@@ -67,7 +67,7 @@ class Round
   end
 
   def percent_correct_by_category(category)
-    total_in_category = turns.count { |turn| turn.card.category == category}
+    total_in_category = turns.count { |turn| turn.card.category.downcase == category.downcase}
     100 * number_correct_by_category(category).to_f / total_in_category
   end
 

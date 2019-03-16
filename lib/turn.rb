@@ -9,11 +9,11 @@ class Turn
 # How to handle "ten" instead of 10?
 # How to handle spaces on either side of the answer?
   def correct?
-    @card.answer == @guess
+    card.answer.downcase == guess.downcase
   end
 
   def feedback
-    return "Correct!" if @card.answer == @guess
+    return "Correct!" if card.answer.downcase == guess.downcase
     "Incorrect."
   end
 
