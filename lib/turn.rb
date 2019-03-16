@@ -9,11 +9,10 @@ class Turn
   end
 
 # This method returns a boolean indicating if the guess matched the answer on the Card.
+# How to handle "ten" instead of 10?
   def correct?
     @card.answer == @guess
   end
-
-  
 
 # This method either returns "Correct!" or "Incorrect." based on whether the guess was correct or not.
   def feedback

@@ -3,7 +3,7 @@ require './lib/card'
 class Deck
 
 # A deck is initilized.
-  attr_reader           :cards
+  attr_reader           :cards,
                         :cards_by_category
   def initialize(cards)
     @cards              = cards
@@ -12,7 +12,7 @@ class Deck
 
 # This method counts the cards currently in the deck.
   def count
-    cards.count
+   cards.count
   end
 
 # This method counts which cards fall under a category. Uses lib/card because card_1 is not an array by itself, it is just an object with attributes.

@@ -130,4 +130,17 @@ class RoundTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_category_array_at_end_of_game
+
+    new_turn = @round.take_turn("Juneau")
+    new_turn = @round.take_turn("Venus")
+    new_turn = @round.take_turn("Venus")
+    
+    expected = [:Geography, :STEM]
+    actual = @round.categories
+
+    assert_equal expected, actual
+
+  end
+
 end

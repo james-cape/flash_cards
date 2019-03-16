@@ -8,51 +8,51 @@ require 'pry'
 class Round
 
   attr_reader :deck,
-              :turns
+              :turns,
               :current_card
 
   def initialize(deck)
     @deck =         deck
     @turns =        []
     @current_card = []
+
   end
 
   def start
-  puts "Welcome! You're playing with #{@deck.count} cards."
-  puts "-------------------------------------------------"
+    puts "Welcome! You're playing with #{@deck.count} cards."
+    puts "-------------------------------------------------"
 
-  i = 0
-  while i < @deck.count
+    i = 0
+      while i < @deck.count
 
-  puts "This is card number #{i + 1} out of #{@deck.count}."
-  puts "Question: #{@deck.cards[i].question}"
+        puts "This is card number #{i + 1} out of #{@deck.count}."
+        puts "Question: #{@deck.cards[i].question}"
 
-  guess = gets.chomp
+        guess = gets.chomp
 
-  take_turn(guess)
+        take_turn(guess)
 
-  puts turns.last.feedback #Correct or incorrect
-  i += 1
-  end
+        puts turns.last.feedback #Correct or incorrect
+        i += 1
+      end
 
-  puts "****** Game over! ******"
-  # round_test instructions specified percentages to one decimal
-  puts "You had #{number_correct} correct guesses out of #{i} for a total score of #{percent_correct}%."
-  puts "STEM - #{percent_correct_by_category(:STEM)}% correct"
-  puts "Turing Staff - #{percent_correct_by_category(:Turing_Staff)}% correct"
-  puts "Pop Culture - #{percent_correct_by_category(:Pop_Culture)}% correct"
+    puts "****** Game over! ******"
+    # round_test instructions specified percentages to one decimal
+    # Implement singular "guess" if 1 correct.
+    puts "You had #{number_correct} correct guesses out of #{i} for a total score of #{percent_correct}%."
+
+    categories.each do |cat|
+      puts "#{cat} - #{percent_correct_by_category(cat)}% correct"
+    end
+
   end
 
 
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
     @turns << new_turn
-    new_turn
-  end
 
-# Creates an index based on how many turns have been taken.
-  def deck_index
-    @turns.count
+    new_turn
   end
 
 # Returns a card from the deck depending on the turn count.
@@ -68,6 +68,15 @@ class Round
     correct_turns_arr.count
   end
 
+  def categories
+# Creates array of categories entered by the end of the game.
+    category_array = []
+    @turns.map do |turn|
+      category_array << turn.card.category
+    end
+    category_array.uniq
+
+  end
 
   def number_correct_by_category(category)
 # First create an array of turns with correct guesses.
