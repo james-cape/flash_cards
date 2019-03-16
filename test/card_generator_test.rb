@@ -8,7 +8,7 @@ class CardGeneratorTest < Minitest::Test
   attr_reader :filename,
               :cards_origin
   def setup
-    @filename = "cards.txt"
+    @filename     = "cards.txt"
     @cards_origin = CardGenerator.new(filename)
   end
 
@@ -19,20 +19,20 @@ class CardGeneratorTest < Minitest::Test
   end
 
   def test_read_file
-    expected  = "What is 5 + 5?,10,STEM
+    expected = "What is 5 + 5?,10,STEM
 What is Rachel's favorite animal?,red panda,Turing Staff
 What is Mike's middle name?,nobody knows,Turing Staff
 What cardboard cutout lives at Turing?,Justin bieber,PopCulture
 "
 
-    actual    = cards_origin.read_file
+    actual = cards_origin.read_file
     assert_equal expected, actual
   end
 
   def test_produce_array_of_rows
-    expected  = ["What is 5 + 5?,10,STEM", "What is Rachel's favorite animal?,red panda,Turing Staff", "What is Mike's middle name?,nobody knows,Turing Staff", "What cardboard cutout lives at Turing?,Justin bieber,PopCulture"]
+    expected = ["What is 5 + 5?,10,STEM", "What is Rachel's favorite animal?,red panda,Turing Staff", "What is Mike's middle name?,nobody knows,Turing Staff", "What cardboard cutout lives at Turing?,Justin bieber,PopCulture"]
 
-    actual    = cards_origin.rows_array
+    actual = cards_origin.rows_array
     assert_equal expected, actual
   end
 

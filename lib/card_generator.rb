@@ -1,19 +1,15 @@
 class CardGenerator
 
-
   attr_reader :filename
 
   def initialize(filename)
-
     @filename = filename
-
   end
 
   def read_file
     File.read(@filename)
   end
 
-# Splits .txt string according to
   def rows_array
     read_file.split(/\n+/)
   end
@@ -31,8 +27,6 @@ class CardGenerator
       category = ":#{entry[2]}"
       Card.new(question, answer, category)
     end
-
   end
-
 
 end

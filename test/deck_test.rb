@@ -5,11 +5,9 @@ require './lib/deck'
 require 'pry'
 
 class DeckTest < Minitest::Test
-  attr_reader :card_1,
-              :card_2,
-              :card_3,
-              :cards,
-              :deck
+  attr_reader :card_1, :cards,
+              :card_2, :deck,
+              :card_3
   def setup
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
 
@@ -17,8 +15,8 @@ class DeckTest < Minitest::Test
 
     @card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
 
-    @cards = [card_1, card_2, card_3]
-    @deck = Deck.new(cards)
+    @cards  = [card_1, card_2, card_3]
+    @deck   = Deck.new(cards)
   end
 
   def test_three_cards_exist
@@ -42,13 +40,13 @@ class DeckTest < Minitest::Test
 
   def test_counting_cards_by_category
     expected = 2
-    actual = deck.count_cards_in_category(:STEM)
+    actual   = deck.count_cards_in_category(:STEM)
     assert_equal expected, actual
   end
 
   def test_finding_and_returning_cards_by_category
     expected = [card_2, card_3]
-    actual = deck.cards_in_category(:STEM)
+    actual   = deck.cards_in_category(:STEM)
     assert_equal expected, actual
   end
 

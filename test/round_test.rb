@@ -1,17 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/turn'
 require './lib/card'
+require './lib/turn'
 require './lib/round'
 require './lib/deck'
 require 'pry'
 
 class RoundTest < Minitest::Test
-  attr_reader :card_1,
-              :card_2,
-              :card_3,
-              :deck,
-              :round
+  attr_reader :card_1, :deck,
+              :card_2, :round,
+              :card_3
   def setup
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
 
@@ -19,14 +17,14 @@ class RoundTest < Minitest::Test
 
     @card_3 = Card.new("Describe in words the exact direction that is 697.5° clockwise from due north?", "North north west", :STEM)
 
-    @deck = Deck.new([@card_1, @card_2, @card_3])
+    @deck  = Deck.new([@card_1, @card_2, @card_3])
     @round = Round.new(@deck)
   end
 
   def test_instance_of_deck_and_round
-    assert_instance_of Deck,  deck
+    assert_instance_of  Deck, deck
     assert_instance_of Round, round
-    assert_instance_of Deck,  round.deck
+    assert_instance_of  Deck, round.deck
   end
 
   def test_no_guess_submitted_yet
@@ -65,20 +63,20 @@ class RoundTest < Minitest::Test
     round.take_turn("Juneau")
     round.take_turn("mars")
 
-    assert_equal   "Juneau",  round.turns[0].card.answer
-    assert_equal   "Juneau",  round.turns[0].guess
-    assert_equal :Geography,  round.turns[0].card.category
+    assert_equal   "Juneau", round.turns[0].card.answer
+    assert_equal   "Juneau", round.turns[0].guess
+    assert_equal :Geography, round.turns[0].card.category
 
-    assert_equal     "Mars",  round.turns[1].card.answer
-    assert_equal     "mars",  round.turns[1].guess
-    assert_equal      :STEM,  round.turns[1].card.category
+    assert_equal     "Mars", round.turns[1].card.answer
+    assert_equal     "mars", round.turns[1].guess
+    assert_equal      :STEM, round.turns[1].card.category
   end
 
   def test_guesses_correct_and_current_card
     round.take_turn("Juneau")
 
-    assert_equal      1,  round.number_correct
-    assert_equal card_2,  round.current_card
+    assert_equal      1, round.number_correct
+    assert_equal card_2, round.current_card
   end
 
   def test_second_turn_is_created
