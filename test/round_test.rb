@@ -52,52 +52,52 @@ class RoundTest < Minitest::Test
   end
 
   def test_number_correct_and_current_card
-    new_turn = @round.take_turn("Juneau")
+    @round.take_turn("Juneau")
     assert_equal 1, @round.number_correct
     assert_equal @card_2, @round.current_card
   end
 
   def test_second_turn
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
     assert_instance_of Turn, @round.take_turn("Venus")
   end
 
   def test_number_of_turns_taken_after_two
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
     assert_equal 2, @round.turns.count
   end
 
   def test_feedback_on_second_guess
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
     assert_equal "Incorrect.", @round.turns.last.feedback
   end
 
   def test_number_correct_after_second_guess
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
     assert_equal 1, @round.number_correct
   end
 
   def test_number_correct_by_category
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
 
     assert_equal 1, @round.number_correct_by_category(:Geography)
   end
 
   def test_number_correct_by_category_none_right
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Mars")
+    @round.take_turn("Juneau")
+    @round.take_turn("Mars")
 
     assert_equal 1, @round.number_correct_by_category(:STEM)
   end
 
   def test_percent_correct
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
 
 # Can you take out all the "new_turn"s?
 #
@@ -110,8 +110,8 @@ class RoundTest < Minitest::Test
   end
 
   def test_percent_correct_by_category
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
 
     expected = 100.0
     actual = @round.percent_correct_by_category(:Geography)
@@ -121,8 +121,8 @@ class RoundTest < Minitest::Test
 
   def test_current_card_after_two_turns
 
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
 
     expected = @card_3
     actual = @round.current_card
@@ -132,10 +132,10 @@ class RoundTest < Minitest::Test
 
   def test_category_array_at_end_of_game
 
-    new_turn = @round.take_turn("Juneau")
-    new_turn = @round.take_turn("Venus")
-    new_turn = @round.take_turn("Venus")
-    
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+    @round.take_turn("Venus")
+
     expected = [:Geography, :STEM]
     actual = @round.categories
 
