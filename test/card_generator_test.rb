@@ -44,8 +44,8 @@ What cardboard cutout lives at Turing?,Justin bieber,PopCulture
   end
 
   def test_element_num_to_string_and_category_to_symbol
-    assert_equal   "red panda", cards_origin.cards[1].answer
-    assert_equal ":PopCulture", cards_origin.cards[3].category
+    assert_equal   "Redpanda", cards_origin.cards[1].answer
+    assert_equal :Popculture, cards_origin.cards[3].category
   end
 
 end

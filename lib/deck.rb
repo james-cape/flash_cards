@@ -13,11 +13,14 @@ class Deck
   end
 
   def count_cards_in_category(category)
-    cards.count { |card| card.category == category.to_s.strip.downcase.delete(' ').capitalize.to_sym }
+    formatted_category = category.to_s.strip.downcase.delete(' ').capitalize.to_sym
+    cards.count { |card| card.category == formatted_category }
+
   end
 
   def cards_in_category(category)
-    cards.find_all { |card| card.category == category.to_s.strip.downcase.delete(' ').capitalize.to_sym}
+    formatted_category = category.to_s.strip.downcase.delete(' ').capitalize.to_sym
+    cards.find_all { |card| card.category == formatted_category }
   end
 
 end
