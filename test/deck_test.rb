@@ -8,6 +8,8 @@ class DeckTest < Minitest::Test
   attr_reader :card_1, :cards,
               :card_2, :deck,
               :card_3
+
+#######attr_reader - don't need all these objects. Only if they are to be used as methods.
   def setup
     @card_1 = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
 

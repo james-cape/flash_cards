@@ -11,9 +11,12 @@ class Round
   def initialize(deck)
     @deck =         deck
     @turns =        []
-    @current_card = []
+    # Don't need this instance variable - current_card is just a local variable throughout .round
+    # @current_card = []
   end
 
+
+####### Try shifting this back over to flashcard_runner for practice
   def start
     puts "Welcome! You're playing with #{deck.count} card#{"s" if @deck.count != 1}."
     puts "-------------------------------------------------"
@@ -42,7 +45,8 @@ class Round
 
   def take_turn(guess)
     new_turn = Turn.new(guess, current_card)
-    turns << new_turn
+    #Add "@" below to just make it clear we are referring to the instance of turns.
+    @turns << new_turn
     new_turn
   end
 

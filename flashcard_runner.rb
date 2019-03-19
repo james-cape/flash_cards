@@ -11,3 +11,6 @@ deck     = Deck.new(cards)
 round    = Round.new(deck)
 
 round.start
+
+# for practice:
+# try instead of round.start, just "start"

@@ -22,7 +22,8 @@ class RoundTest < Minitest::Test
   end
 
   def test_instance_of_deck_and_round
-    assert_instance_of  Deck, deck
+    ##### redundant after testing in .deck
+    # assert_instance_of  Deck, deck
     assert_instance_of Round, round
     assert_instance_of  Deck, round.deck
   end
@@ -160,7 +161,7 @@ class RoundTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_category_array_at_end_of_game
+  def test_creates_list_of_all_categories
     round.take_turn("Juneau")
     round.take_turn("Venus")
     round.take_turn("Venus")

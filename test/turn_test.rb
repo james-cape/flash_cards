@@ -24,6 +24,7 @@ class TurnTest < Minitest::Test
     assert_equal expected, actual
   end
 
+# This is redundant after testing these in Card class file.
   def test_card_exists_and_has_attributes
     assert_instance_of Card, card
     assert_equal   "Juneau", card.answer
